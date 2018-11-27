@@ -8,6 +8,7 @@ python-slugify = "*"
 django = "*"
 django-extensions = "*"
 django-registration-redux = "*"
+django-registration = "*"
 
 [dev-packages]
 

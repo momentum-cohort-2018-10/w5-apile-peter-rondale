@@ -11,6 +11,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(null=True)
     date_added = models.DateTimeField(auto_now=True)
+    last_modified = models.DateTimeField(auto_now_add=False, null=True)
     slug = models.SlugField(unique=True)
 
     #def save(self):

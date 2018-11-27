@@ -9,7 +9,8 @@
         {% for post in posts %}
             <h1>{{ post.title }}</h1>
             <p>{{ post.description }}</p>
-            <p>{{ post.date_added }}</p>
+            <p>Created {{ post.date_added }}</p>
+            <p>Updated {{ post.last_modified }}</p>
             <p>Posted By {{ post.author }}</p>
         {% endfor %}
     {% endblock content %}
