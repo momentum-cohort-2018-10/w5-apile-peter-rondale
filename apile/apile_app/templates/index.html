@@ -1,10 +1,10 @@
-<!doctype html>
-<html>
-<head>
-</head>
-    <title>Apile</title>
-<body>
-    <h1>Welcome to Apile</h1>
-    <p>blah blah blah<p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.description }}</p>
+        <p>{{ post.date_added }}</p>
+        <p>Posted By {{ post.author }}</p>
+    {% endfor %}
+{% endblock content %}
