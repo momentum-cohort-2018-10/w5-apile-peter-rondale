@@ -1,6 +1,8 @@
+from django.contrib.auth.models import User
 from django.db import models
 from slugify import slugify
 #from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Post(models.Model):
