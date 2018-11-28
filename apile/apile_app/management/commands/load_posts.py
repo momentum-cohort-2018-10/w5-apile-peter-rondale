@@ -3,6 +3,7 @@ from django.conf import settings
 import os.path
 import csv
 from apile_app.models import Post
+from django.contrib.auth.models import User
 
 class Command(BaseCommand):
     help = "My shiny new management command."
@@ -14,6 +15,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print("Deleting posts...")
         Post.objects.all().delete()
+        user = User.objects.first()
+        if not user:
+            raise RuntimeError("You must create a user before running this.")
         with open(os.path.join(settings.BASE_DIR, 'apile_app/data', 
                                 'articles.csv')) as file:
             reader = csv.DictReader(file)
@@ -21,7 +25,7 @@ class Command(BaseCommand):
             for row in reader:
                 
                 post = Post(
-                    author=row['author'],
+                    author=user,
                     title=row['title'],
                     description=row['description'],
                     slug=row['slug'],
