@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from apile_app import views
+from apile_app.backends import MyRegistrationView
 
 urlpatterns = [
     path('', views.index, name='home'),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),
+    path('accounts/create_post/', views.create_post, name='registration_create_post'),
     path('admin/', admin.site.urls),
 ]
