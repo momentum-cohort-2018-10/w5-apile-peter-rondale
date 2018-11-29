@@ -10,7 +10,13 @@ class Post(models.Model):
     date_added = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True)
 
-    # def save(self):
-    #     if not self.id:
-    #         self.slug = slugify(self.id)
-    #     super(Post, self).save()
+    def save(self):
+        if not self.id:
+            self.slug = slugify(self.title)
+        super(Post, self).save()
+
+# class Comment(models.Model):
+#     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE, blank=True)
+#     post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)
+#     description = models.TextField(null=True)
+#     date_added = models.DateTimeField(auto_now=True)

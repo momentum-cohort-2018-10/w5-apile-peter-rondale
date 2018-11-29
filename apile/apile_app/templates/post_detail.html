@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{post.title}} - {{ block.super }}
+{% endblock title %}
+{% block content %}
+    <h2>{{post.title}}</h2>
+    <ul>
+    <li>Posted by: {{post.author}}</li>
+    <li>{{post.description}}</li>
+    <li>Added on: {{post.date_added}}</li>
+    <p><a 
+{% endblock content %}

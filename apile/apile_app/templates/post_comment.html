@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+<!doctype html>
+<html>
+<head>
+</head>
+    <title>comment on this post</title>
+<body>
+    {% block content %}
+    <h2>Comment</h2>
+    {% comment %} <form method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form> {% endcomment %}
+    {% endblock content %}
+</body>
+</html>
