@@ -7,10 +7,13 @@
 <body>
     {% block content %}
         {% for post in posts %}
-            <h1>{{ post.title }}</h1>
-            <p>{{ post.description }}</p>
-            <p>{{ post.date_added }}</p>
+            <h1>
+            <a href="{% url 'post_detail' slug=post.slug %}">
+            {{ post.title }}
+            </a></h1>
             <p>Posted By {{ post.author }}</p>
+            <p>{{ post.date_added }}</p>
+            {% comment %} <p>{{ post.description }}</p> {% endcomment %}
         {% endfor %}
     {% endblock content %}
 </body>
