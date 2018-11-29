@@ -15,8 +15,8 @@ class Post(models.Model):
             self.slug = slugify(self.title)
         super(Post, self).save()
 
-# class Comment(models.Model):
-#     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE, blank=True)
-#     post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)
-#     description = models.TextField(null=True)
-#     date_added = models.DateTimeField(auto_now=True)
+class Comment(models.Model):
+    author = models.ForeignKey(User, null=True, on_delete=models.CASCADE, blank=True)
+    post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)
+    description = models.TextField(null=True)
+    date_added = models.DateTimeField(auto_now=True)
