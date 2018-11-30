@@ -8,5 +8,8 @@
     <li>Posted by: {{post.author}}</li>
     <li>{{post.description}}</li>
     <li>Added on: {{post.date_added}}</li>
-    <p><a 
+    
+    <form action="{% url 'home' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-primary">Like</button>
 {% endblock content %}

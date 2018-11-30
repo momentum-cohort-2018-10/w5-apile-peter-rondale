@@ -20,3 +20,7 @@ class Post(models.Model):
 #     post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)
 #     description = models.TextField(null=True)
 #     date_added = models.DateTimeField(auto_now=True)
+
+class Votes(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE, related_name='votes')

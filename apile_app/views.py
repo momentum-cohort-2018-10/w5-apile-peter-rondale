@@ -1,7 +1,7 @@
 import csv, io
 from django.shortcuts import redirect
 from django.shortcuts import render
-from apile_app.models import Post
+from apile_app.models import Post, Votes
 from apile_app.forms import PostForm
 from django.contrib.auth.views import login_required
 # Create your views here.
