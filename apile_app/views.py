@@ -47,6 +47,10 @@ def comment_new(request):
         form = PostForm()
     return render(request, 'post_comment.html', {'form': form})
 
+@login_required
+def switch_vote(request):
+    pass
+
 def post_vote(request):
     post = Post.objects.get(slug=slug) #retrieves the post by slug
     post.vote.add(request.user) #will know that the logged in user liked the post

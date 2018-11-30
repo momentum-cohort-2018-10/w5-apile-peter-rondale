@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apile_app.models import Post
+from apile_app.models import Post, Vote
 
 class PostAdmin(admin.ModelAdmin):
     model = Post

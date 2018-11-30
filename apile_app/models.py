@@ -15,6 +15,12 @@ class Post(models.Model):
             self.slug = slugify(self.title)
         super(Post, self).save()
 
+    def is_liked_by_user(self, author):
+        """
+        Get all of the votes for posts, filter by the logged in user, tell whether or not it has been liked
+        """
+        return self.posts.filter(author=user).count() > 0
+
 # class Comment(models.Model):
 #     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE, blank=True)
 #     post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)
@@ -24,3 +30,9 @@ class Post(models.Model):
 class Vote(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE, related_name='votes')
+
+    class Meta:
+        unique_together = (
+            'post',
+            'author',
+        )

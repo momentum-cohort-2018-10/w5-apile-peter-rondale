@@ -7,11 +7,22 @@
 <body>
     {% block content %}
         {% for post in posts %}
-            <h1>
-            <a href="{% url 'post_detail' slug=post.slug %}">
-            {{ post.title }}
-            </a></h1>
+            <h2>
+            <a href="{% url 'post_detail' slug=post.slug %}" style="text-decoration:none">
+                {{ post.title }} 
+            </a>
+            {% if request.user.is_authenticated %}
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="post" value="{{ post.pk }}">
+                <button type="submit">Like</button>
+            </form>
+            {% endif %}
+            </h2>
             <p>Posted By {{ post.author }}</p>
+                <div>
+                    {{ post.votes.count }} Like{{ post.votes.count|pluralize }}
+                </div>
             <p>{{ post.date_added }}</p>
             {% comment %} <p>{{ post.description }}</p> {% endcomment %}
         {% endfor %}

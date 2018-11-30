@@ -6,7 +6,7 @@ from apile_app.models import Post
 from django.contrib.auth.models import User
 
 class Command(BaseCommand):
-    help = "My shiny new management command."
+    help = "Loads data."
 
     def add_arguments(self, parser):
         #parser.add_argument('sample', nargs='+')
