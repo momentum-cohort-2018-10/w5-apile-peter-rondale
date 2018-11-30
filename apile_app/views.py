@@ -3,13 +3,19 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from apile_app.models import Post, Comment, Vote
 from apile_app.forms import PostForm, CommentForm
+from django.db.models import Count
 from django.contrib.auth.views import login_required
 # Create your views here.
 
 def index(request):
     posts = Post.objects.all()
+    posts = posts.annotate(num_of_votes=Count('votes'))
+    voted_posts = []
+    if request.user.is_authenticated:
+        voted_posts = request.user.voted_posts.all()
     return render(request, 'index.html', {
         'posts': posts,
+        'voted_posts': voted_posts
     })
 
 def post_detail(request, slug):

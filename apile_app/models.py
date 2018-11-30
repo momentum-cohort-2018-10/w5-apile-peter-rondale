@@ -9,6 +9,8 @@ class Post(models.Model):
     description = models.TextField(null=True)
     date_added = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True)
+    voted_posts = models.ManyToManyField(
+        to=User, through='Vote', related_name='voted_posts')
 
     def save(self):
         if not self.id:
@@ -20,12 +22,6 @@ class Post(models.Model):
         Get all of the votes for posts, filter by the logged in user, tell whether or not it has been liked
         """
         return self.posts.filter(author=user).count() > 0
-
-# class Comment(models.Model):
-#     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE, blank=True)
-#     post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)
-#     description = models.TextField(null=True)
-#     date_added = models.DateTimeField(auto_now=True)
 
 class Vote(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
