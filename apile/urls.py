@@ -19,8 +19,7 @@ from apile_app import views
 
 urlpatterns = [
     path('', views.index, name='home'),
-    path('create-new-post/', views.post_new, name='post_new'),
-    path('create-new-comment/', views.comment_new, name='comment_new'),
+    path('post/new', views.post_new, name='post_new'),
     path('post/<slug>', views.post_detail, name='post_detail'),
     path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
