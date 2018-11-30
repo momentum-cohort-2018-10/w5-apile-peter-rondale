@@ -10,7 +10,7 @@ class Post(models.Model):
     date_added = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True)
     voted_posts = models.ManyToManyField(
-        to=User, through='Vote', related_name='voted_posts')
+        to=User, through='Vote', related_name='voted_posts') #Traverses from Post model to Favorite model to look
 
     def save(self):
         if not self.id:

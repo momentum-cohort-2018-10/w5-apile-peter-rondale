@@ -21,6 +21,7 @@ urlpatterns = [
     path('', views.index, name='home'),
     path('post/new', views.post_new, name='post_new'),
     path('post/<slug>', views.post_detail, name='post_detail'),
+    path('post/<slug>/vote', views.switch_vote, name='switch_vote'),
     path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
 ]
