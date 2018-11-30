@@ -1,7 +1,7 @@
 import csv, io
 from django.shortcuts import redirect
 from django.shortcuts import render
-from apile_app.models import Post, Votes
+from apile_app.models import Post, Vote
 from apile_app.forms import PostForm
 from django.contrib.auth.views import login_required
 # Create your views here.
@@ -46,3 +46,8 @@ def comment_new(request):
     else:
         form = PostForm()
     return render(request, 'post_comment.html', {'form': form})
+
+def post_vote(request):
+    post = Post.objects.get(slug=slug) #retrieves the post by slug
+    post.vote.add(request.user) #will know that the logged in user liked the post
+    return redirect('home') #redirects user to homepage
