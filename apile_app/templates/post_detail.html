@@ -3,10 +3,23 @@
     {{post.title}} - {{ block.super }}
 {% endblock title %}
 {% block content %}
+
     <h2>{{post.title}}</h2>
     <ul>
     <li>Posted by: {{post.author}}</li>
-    <li>{{post.description}}</li>
+    <li>{{ post.description }}</li>
     <li>Added on: {{post.date_added}}</li>
-    <p><a 
+
+    {% for comment in comments %}
+        <h4>{{ comment.author }} commented at {{comment.date_added}}:</h4>
+        <p>{{ comment.description }}</p>
+    {% endfor %}
+
+    <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+    </form>
+
 {% endblock content %}
+
