@@ -4,6 +4,7 @@ from django.shortcuts import render
 from apile_app.models import Post, Comment, Vote
 from apile_app.forms import PostForm, CommentForm
 from django.contrib.auth.views import login_required
+from django.views.decorators.http import require_POST
 # Create your views here.
 
 def index(request):
@@ -27,8 +28,27 @@ def post_detail(request, slug):
     return render(request, 'post_detail.html', {
         'post': post,
         'form': CommentForm(),
-        'comments': post.comment_set.all()
+        'comments': post.comment_set.all(),
+        'slug': slug,
     })
+
+@login_required
+@require_POST
+def post_delete(request, slug):
+    post = Post.objects.get(slug=slug)
+    if request.user == post.author:
+        post.delete()
+    return redirect('home')
+
+@login_required
+@require_POST
+def comment_delete(request, slug, description):
+    comment = Comment.objects.get(description=description)
+    if request.user == comment.author:
+        comment.delete()
+    return redirect('home')
+
+
 
 @login_required
 def post_new(request):
@@ -42,20 +62,6 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'post_create.html', {'form': form})
-
-def comment_new(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            # post.slug = slug
-            # post.date_added = datetime.now()
-            post.save()
-            return redirect('home')
-    else:
-        form = PostForm()
-    return render(request, 'post_comment.html', {'form': form})
 
 @login_required
 def switch_vote(request):
