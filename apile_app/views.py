@@ -92,10 +92,10 @@ def switch_vote(request, post_id):
     post = Post.objects.get(pk=post_id)
     if post in request.user.voted_posts.all():
         post.votes.filter(author=request.user).delete()
-        message = "You don't like this post anymore?"
+        message = "I don't like this post!"
     else:
         post.votes.create(author=request.user)
-        message = "I like this!!!"
+        message = "I like this post!"
 
-    messages.add_message(request, messages.INFO, message)
+    messages.add_message(request, messages.SUCCESS, message)
     return redirect(to='home')

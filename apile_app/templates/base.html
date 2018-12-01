@@ -8,6 +8,7 @@
         {% endblock title %}
     </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
 </head>
 <body>
     <header>
@@ -33,6 +34,9 @@
             </ul>
         </nav>
     </header>
+    {% for message in messages %}
+        <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
     {% block content %}{% endblock content %}
     {% block footer %}{% endblock footer %}
 </body>

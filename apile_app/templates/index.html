@@ -17,9 +17,9 @@
                     {% csrf_token %}
                     <button type="submit">
                         {% if post in voted_posts %}
-                        Un-Like <!-- change to a thumbs down -->
+                        &#x1f44e; <!-- thumbs down -->
                         {% else %}
-                        Like <!-- change to a thumbs up -->
+                        &#x1f44d; <!-- thumbs up -->
                         {% endif %}
                     </button>
                 </form>
