@@ -1,16 +1,23 @@
 import csv, io
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.views.decorators.http import require_POST
 from apile_app.models import Post, Comment, Vote
 from apile_app.forms import PostForm, CommentForm
+from django.db.models import Count
 from django.contrib.auth.views import login_required
 from django.views.decorators.http import require_POST
 # Create your views here.
 
 def index(request):
     posts = Post.objects.all()
+    posts = posts.annotate(num_of_votes=Count('votes'))
+    voted_posts = []
+    if request.user.is_authenticated:
+        voted_posts = request.user.voted_posts.all()
     return render(request, 'index.html', {
         'posts': posts,
+        'voted_posts': voted_posts
     })
 
 def post_detail(request, slug):
@@ -63,11 +70,27 @@ def post_new(request):
         form = PostForm()
     return render(request, 'post_create.html', {'form': form})
 
-@login_required
-def switch_vote(request):
-    pass
+def comment_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('home')
+    else:
+        form = PostForm()
+    return render(request, 'post_comment.html', {'form': form})
 
-def post_vote(request):
-    post = Post.objects.get(slug=slug) #retrieves the post by slug
-    post.vote.add(request.user) #will know that the logged in user liked the post
-    return redirect('home') #redirects user to homepage
+
+
+@require_POST                   #Have to submit form to access
+@login_required
+def switch_vote(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    if post in request.user.voted_posts.all():
+        post.votes.filter(author=request.user).delete()
+    else:
+        post.votes.create(author=request.user)
+
+    return redirect(request, 'home')

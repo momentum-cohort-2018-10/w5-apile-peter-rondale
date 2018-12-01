@@ -15,7 +15,13 @@
             <form method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="post" value="{{ post.pk }}">
-                <button type="submit">Like</button>
+                <button type="submit">
+                {% if post in voted_posts %}
+                Un-Like <!-- change to a thumbs down -->
+                {% else %}
+                Like <!-- change to a thumbs up -->
+                {% endif %}
+                </button>
             </form>
             {% endif %}
             </h2>
