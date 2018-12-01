@@ -28,7 +28,7 @@
             </h2>
             <p>Posted By {{ post.author }}</p>
                 <div>
-                    {{ post.votes.count }} Like{{ post.votes.count|pluralize }}
+                    <p><a href="{% url 'post_detail' slug=post.slug %}" style="text-decoration:none">{{ post.votes.count }} Like{{ post.votes.count|pluralize }}</a></p>
                 </div>
             <p>{{ post.date_added }}</p>
         {% endfor %}
