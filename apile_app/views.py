@@ -7,11 +7,13 @@ from apile_app.forms import PostForm, CommentForm
 from django.db.models import Count
 from django.contrib.auth.views import login_required
 from django.views.decorators.http import require_POST
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
     posts = Post.objects.all()
     posts = posts.annotate(num_of_votes=Count('votes'))
+
     voted_posts = []
     if request.user.is_authenticated:
         voted_posts = request.user.voted_posts.all()
@@ -90,7 +92,10 @@ def switch_vote(request, post_id):
     post = Post.objects.get(pk=post_id)
     if post in request.user.voted_posts.all():
         post.votes.filter(author=request.user).delete()
+        message = "You don't like this post anymore?"
     else:
         post.votes.create(author=request.user)
+        message = "I like this!!!"
 
-    return redirect(request, 'home')
+    messages.add_message(request, messages.INFO, message)
+    return redirect(to='home')
