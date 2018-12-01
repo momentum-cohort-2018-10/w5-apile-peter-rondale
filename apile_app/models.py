@@ -22,6 +22,7 @@ class Post(models.Model):
         Get all of the votes for posts, filter by the logged in user, tell whether or not it has been liked
         """
         return self.posts.filter(author=user).count() > 0
+        
 
 class Vote(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)

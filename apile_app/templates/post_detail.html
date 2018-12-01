@@ -9,17 +9,33 @@
     <li>Posted by: {{post.author}}</li>
     <li>{{ post.description }}</li>
     <li>Added on: {{post.date_added}}</li>
+    </ul>
+
+    {% if request.user == post.author %}
+        <form method="POST" action="{% url 'post_delete' slug=post.slug %}">
+        {% csrf_token %}
+        <button type="submit">Delete this post</button></a>
+        </form>
+
+    {% endif %}
 
     {% for comment in comments %}
         <h4>{{ comment.author }} commented at {{comment.date_added}}:</h4>
         <p>{{ comment.description }}</p>
+        {% if request.user == comment.author %}
+            <form method="POST" action="{% url 'comment_delete' slug=post.slug description=comment.description %}">
+            {% csrf_token %}
+            <button type="submit">Delete this comment</button></a>
+            </form>
+        {% endif %}
     {% endfor %}
 
-    <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-    </form>
+    {% if request.user.is_authenticated %}
+        <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+        </form>
+    {% endif %}
 
 {% endblock content %}
-
