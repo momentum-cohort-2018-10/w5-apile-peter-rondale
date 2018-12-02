@@ -10,6 +10,7 @@ django-extensions = "*"
 django-registration-redux = "*"
 django-simple-pagination = "*"
 django-el-pagination = "*"
+mimesis = "*"
 
 [dev-packages]
 "flake8" = "*"

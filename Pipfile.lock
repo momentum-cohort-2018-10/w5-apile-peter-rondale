@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7a082f72a29193bb6c8dca9eb9325c6df7b8e0b2b869baa675bc858e59b9e9ab"
+            "sha256": "e6ccd0d16cb984e805adaa72321663c22f76c1625b5da568f7ee2e5a0a4ceb29"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -52,6 +52,14 @@
             ],
             "index": "pypi",
             "version": "==1.2"
+        },
+        "mimesis": {
+            "hashes": [
+                "sha256:2a17aa98cc8aff2c0b1828312e213a515030ed57a1c7b61fc07a87150cb0f25f",
+                "sha256:4b856023acdaaefe2e10bbfea9fd4cb6fa9adbbbe9618a8f796aa8887b58e6f2"
+            ],
+            "index": "pypi",
+            "version": "==2.1.0"
         },
         "python-slugify": {
             "hashes": [
