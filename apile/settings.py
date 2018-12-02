@@ -96,9 +96,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
@@ -133,4 +130,14 @@ EMAIL_USE_TLS = False
 EMAIL_PORT = 1025
 
 LOGIN_REDIRECT_URL = "home"
+
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'bg-red white pa3 br3 ma3',
+    messages.INFO: 'bg-pink pa3 br3 ma3',
+    messages.SUCCESS: 'bg-green white pa3 br3 ma3',
+    messages.WARNING: 'bg-yellow white pa3 br3 ma3',
+}
 

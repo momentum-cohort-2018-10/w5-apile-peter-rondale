@@ -13,19 +13,20 @@
             <a href="{% url 'post_detail' slug=post.slug %}" style="text-decoration:none">
                 {{ post.title }} 
             </a>
+
             {% if request.user.is_authenticated %}
-            <form method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="post" value="{{ post.pk }}">
-                <button type="submit">
-                {% if post in voted_posts %}
-                Un-Like <!-- change to a thumbs down -->
-                {% else %}
-                Like <!-- change to a thumbs up -->
-                {% endif %}
-                </button>
-            </form>
+                <form method="POST" action="{% url 'switch_vote' post_id=post.pk%}">
+                    {% csrf_token %}
+                    <button type="submit">
+                        {% if post in voted_posts %}
+                        &#x1f44e; <!-- thumbs down -->
+                        {% else %}
+                        &#x1f44d; <!-- thumbs up -->
+                        {% endif %}
+                    </button>
+                </form>
             {% endif %}
+
             </h2>
             <p>Posted By {{ post.author }}</p>
                 <div>
