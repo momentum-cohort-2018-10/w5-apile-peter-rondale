@@ -8,6 +8,8 @@ python-slugify = "*"
 django = "*"
 django-extensions = "*"
 django-registration-redux = "*"
+django-simple-pagination = "*"
+django-el-pagination = "*"
 
 [dev-packages]
 "flake8" = "*"

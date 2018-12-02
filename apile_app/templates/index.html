@@ -6,6 +6,8 @@
     <title>Apile</title>
 <body>
     {% block content %}
+        {% load el_pagination_tags %}
+        {% paginate posts %}
         {% for post in posts %}
             <h2>
             <a href="{% url 'post_detail' slug=post.slug %}" style="text-decoration:none">
@@ -32,6 +34,7 @@
                 </div>
             <p>{{ post.date_added }}</p>
         {% endfor %}
+        {% show_pages %}
     {% endblock content %}
 </body>
 </html>
