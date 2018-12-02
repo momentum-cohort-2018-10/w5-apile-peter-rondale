@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     'apile_app',
     'registration',
     'django_extensions',
+    'el_pagination',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -130,6 +131,7 @@ EMAIL_PORT = 1025
 
 LOGIN_REDIRECT_URL = "home"
 
+
 from django.contrib.messages import constants as messages
 
 MESSAGE_TAGS = {
@@ -138,3 +140,4 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'bg-green white pa3 br3 ma3',
     messages.WARNING: 'bg-yellow white pa3 br3 ma3',
 }
+
