@@ -32,12 +32,14 @@
             </h2>
             <p class="f6 f5-ns lh-copy measure">Posted By {{ post.author }}</p>
                 <div>
-                    {{ post.votes.count }} Like{{ post.votes.count|pluralize }}
+                    {{ post.votes.count }} Like{{ post.votes.count|pluralize }}, {{ post.comments.count }} Comment{{ post.comments.count|pluralize }}
                 </div>
-            <p class="f6 f5-ns lh-copy measure">{{ post.date_added }}</p>
+            <p class="f6 f5-ns lh-copy measure">Posted On {{ post.date_added }}</p>
         </article>
         {% endfor %}
+        <div class="f4 tc cf mv2">
         {% show_pages %}
+        </div>
         </section>
     {% endblock content %}
 </body>
