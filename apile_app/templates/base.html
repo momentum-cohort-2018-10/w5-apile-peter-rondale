@@ -9,25 +9,28 @@
     </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
 </head>
 <body>
     <header>
-        <h1>Apile</h1>
-        <nav>
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
+            <div class="pa3 pa4-ns">
+                <h1 class="dim black b f1 f-headline-ns tc db mb3 mb4-ns">Apile</h1>
+            </div>
+        <nav class="bg-black-90 w-100 ph3 pv3 pv4-ns ph4-m ph5-l">
+            <ul class="f6 fw6 ttu tracked">
+                <li class="column ph3 pv3 bb b--light-silver"><a href="{% url 'home' %}">Home</a></li>
                 {% if user.is_authenticated %}
-                <li>
+                <li class="column ph3 pv3 bb b--light-silver">
                     <a href="{% url 'auth_logout' %}">Logout</a>
                 </li>
-                <li>
+                <li class="column ph3 pv3 bb b--light-silver">
                     <a href="{% url 'post_new' %}">New Post</a>
                 </li>
                 {% else %}
-                <li>
+                <li class="column ph3 pv3 bb b--light-silver">
                     <a href="{% url 'auth_login' %}">Login</a>
                 </li>
-                <li>
+                <li class="column ph3 pv3 bb b--light-silver">
                     <a href="{% url 'registration_register' %}">Register</a>
                 </li>
                 {% endif %}
@@ -37,6 +40,7 @@
     {% for message in messages %}
         <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
     {% endfor %}
+
     {% block content %}{% endblock content %}
     {% block footer %}{% endblock footer %}
 </body>

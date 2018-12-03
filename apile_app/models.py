@@ -36,6 +36,6 @@ class Vote(models.Model):
         )
 class Comment(models.Model):
     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE, blank=True)
-    post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE, related_name="comments")
     description = models.TextField(null=True)
     date_added = models.DateTimeField(auto_now=True)

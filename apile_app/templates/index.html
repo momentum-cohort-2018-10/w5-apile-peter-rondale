@@ -6,13 +6,15 @@
     <title>Apile</title>
 <body>
     {% block content %}
+    <section class="section">
         {% load el_pagination_tags %}
         {% paginate posts %}
         {% for post in posts %}
-            <h2>
+        <article class="center mw5 mw6-ns br3 hidden ba b--black-10 mv4">
+            <h2 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
             <a href="{% url 'post_detail' slug=post.slug %}" style="text-decoration:none">
                 {{ post.title }} 
-            </a>
+            </a></h2>
 
             {% if request.user.is_authenticated %}
                 <form method="POST" action="{% url 'switch_vote' post_id=post.pk%}">
@@ -28,13 +30,17 @@
             {% endif %}
 
             </h2>
-            <p>Posted By {{ post.author }}</p>
+            <p class="f6 f5-ns lh-copy measure">Posted By {{ post.author }}</p>
                 <div>
-                    <p><a href="{% url 'post_detail' slug=post.slug %}" style="text-decoration:none">{{ post.votes.count }} Like{{ post.votes.count|pluralize }}</a></p>
+                    <p><a href="{% url 'post_detail' slug=post.slug %}" style="text-decoration:none">{{ post.votes.count }} Like{{ post.votes.count|pluralize }}, {{ post.comments.count }} Comment{{ post.comments.count|pluralize }}</a></p>
                 </div>
-            <p>{{ post.date_added }}</p>
+            <p class="f6 f5-ns lh-copy measure">Posted On {{ post.date_added }}</p>
+        </article>
         {% endfor %}
+        <div class="f4 tc cf mv2">
         {% show_pages %}
+        </div>
+        </section>
     {% endblock content %}
 </body>
 </html>
