@@ -9,7 +9,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(null=True)
     date_added = models.DateTimeField(auto_now=True)
-    slug = AutoSlugField(('slug'), max_length=10, unique=True, populate_from=('description',))
+    slug = AutoSlugField(('slug'), max_length=10, unique=True, populate_from=('title',))
     voted_posts = models.ManyToManyField(
         to=User, through='Vote', related_name='voted_posts') #Traverses from Post model to Favorite model to look
 
