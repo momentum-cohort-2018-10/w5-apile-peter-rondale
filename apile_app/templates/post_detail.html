@@ -4,12 +4,17 @@
 {% endblock title %}
 {% block content %}
 
-    <h2>{{post.title}}</h2>
-    <ul>
-    <li>Posted by: {{post.author}}</li>
-    <li>{{ post.description }}</li>
-    <li>Added on: {{post.date_added}}</li>
-    </ul>
+    <article class="pa3 pa5-ns">
+        <h1 class="f3 f2-m f1-l">{{post.title}}</h1>
+            <ul>
+            <li class="lh-copy">
+            Posted by {{ post.author}} on {{ post.date_added }}</p>
+            <br>
+            </ul>
+            <p class="lh-copy">
+            {{ post.description }}
+            </p>
+            <br>
 
     {% if request.user == post.author %}
         <form method="POST" action="{% url 'post_delete' slug=post.slug %}">
@@ -18,24 +23,35 @@
         </form>
 
     {% endif %}
+    </article>
 
     {% for comment in comments %}
-        <h4>{{ comment.author }} commented at {{comment.date_added}}:</h4>
-        <p>{{ comment.description }}</p>
+    <article class="center mw5 mw6-ns br3 hidden ba b--black-10 mv4">
+        <h4 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">{{ comment.author }} commented at {{comment.date_added}}:</h4>
+        <p class="f6 f5-ns lh-copy measure">{{ comment.description }}</p>
         {% if request.user == comment.author %}
             <form method="POST" action="{% url 'comment_delete' slug=post.slug description=comment.description %}">
             {% csrf_token %}
             <button type="submit">Delete this comment</button></a>
             </form>
         {% endif %}
+        </article>
     {% endfor %}
 
     {% if request.user.is_authenticated %}
+    <article class="center mw5 mw6-ns br3 hidden ba b--black-10 mv4">
+  <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">Leave a Comment</h1>
+  <div class="pa3 bt b--black-10">
+    <p class="f6 f5-ns lh-copy measure">
         <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save</button>
         </form>
+            </p>
+  </div>
+</article>
     {% endif %}
 
 {% endblock content %}
+

@@ -13,17 +13,17 @@ from django.contrib import messages
 def index(request):
     posts = Post.objects.all()
     posts = posts.annotate(num_of_votes=Count('votes'))
-
     voted_posts = []
     if request.user.is_authenticated:
         voted_posts = request.user.voted_posts.all()
     return render(request, 'index.html', {
         'posts': posts,
-        'voted_posts': voted_posts
+        'voted_posts': voted_posts,
     })
 
 def post_detail(request, slug):
     post = Post.objects.get(slug=slug)
+    comments = post.comments.all()
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -37,7 +37,7 @@ def post_detail(request, slug):
     return render(request, 'post_detail.html', {
         'post': post,
         'form': CommentForm(),
-        'comments': post.comment_set.all(),
+        'comments': comments,
         'slug': slug,
     })
 
