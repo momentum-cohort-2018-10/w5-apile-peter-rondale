@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -145,5 +146,4 @@ MESSAGE_TAGS = {
     messages.WARNING: 'bg-yellow white pa3 br3 ma3',
 }
 
-import django_heroku
-django_heroku.setting(locals())
+django_heroku.settings(locals())

@@ -12,6 +12,7 @@ django-simple-pagination = "*"
 django-el-pagination = "*"
 "psycopg2" = "*"
 django-heroku = "*"
+gunicorn = "*"
 
 [dev-packages]
 "flake8" = "*"
