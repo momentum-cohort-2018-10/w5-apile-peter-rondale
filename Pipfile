@@ -11,6 +11,7 @@ django-registration-redux = "*"
 django-simple-pagination = "*"
 django-el-pagination = "*"
 "psycopg2" = "*"
+django-heroku = "*"
 
 [dev-packages]
 "flake8" = "*"
